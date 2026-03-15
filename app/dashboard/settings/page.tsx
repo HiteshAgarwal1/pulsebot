@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { TIMEZONES, type UserConfig } from "@/lib/types";
+import { AVAILABLE_TOPICS, TIMEZONES, type UserConfig } from "@/lib/types";
 import { toast } from "sonner";
 import {
   Card,
@@ -112,7 +112,7 @@ export default function SettingsPage() {
         })
         .eq("user_id", userId));
     } else {
-      // Insert new row
+      // Insert new row with all topics selected by default
       ({ error } = await supabase
         .from("user_configs")
         .insert({
@@ -123,6 +123,7 @@ export default function SettingsPage() {
           timezone: form.timezone,
           top_n: form.top_n,
           is_active: form.is_active,
+          topics: [...AVAILABLE_TOPICS],
         }));
     }
 

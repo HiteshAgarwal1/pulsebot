@@ -6,12 +6,18 @@ import type { UserConfig } from "@/lib/types";
 
 export async function GET(request: NextRequest) {
   try {
-    // Validate cron secret
-    const secret =
-      request.headers.get("x-cron-secret") ||
-      request.nextUrl.searchParams.get("secret");
+    // Validate cron secret (supports Vercel Cron header and custom secret)
+    const isVercelCron =
+      request.headers.get("authorization") ===
+      `Bearer ${process.env.CRON_SECRET}`;
+    const isCustomSecret =
+      (request.headers.get("x-cron-secret") ||
+        request.nextUrl.searchParams.get("secret")) ===
+      process.env.CRON_SECRET;
 
-    if (secret !== process.env.CRON_SECRET) {
+    if (!isVercelCron && !isCustomSecret) {
+      console.log("[Cron] Auth failed. CRON_SECRET is set:", !!process.env.CRON_SECRET);
+      console.log("[Cron] Received secret:", request.nextUrl.searchParams.get("secret")?.slice(0, 4) + "...");
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

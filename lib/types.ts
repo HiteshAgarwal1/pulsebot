@@ -86,6 +86,14 @@ export const AVAILABLE_TOPICS = [
   "Open Source",
   "AI Safety",
   "AI Tools & Products",
+  "AI Agents",
+  "AI in Healthcare",
+  "Generative Media",
+  "AI Startups",
+  "Multimodal AI",
+  "AI for Marketing",
+  "AI Advertising",
+  "AI Content Creation",
 ] as const;
 
 export type Topic = (typeof AVAILABLE_TOPICS)[number];

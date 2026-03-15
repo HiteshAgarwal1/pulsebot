@@ -37,8 +37,10 @@ export default function TopicsPage() {
       .eq("user_id", user.id)
       .single<Pick<UserConfig, "topics">>();
 
-    if (data?.topics) {
+    if (data?.topics && data.topics.length > 0) {
       setSelected(new Set(data.topics));
+    } else {
+      setSelected(new Set(AVAILABLE_TOPICS));
     }
     setLoading(false);
   }, [supabase]);
@@ -78,13 +80,13 @@ export default function TopicsPage() {
         .update({ topics: Array.from(selected) })
         .eq("user_id", userId));
     } else {
-      // Insert new row with defaults
+      // Insert new row with defaults (all topics if none selected)
       ({ error } = await supabase
         .from("user_configs")
         .insert({
           user_id: userId,
           slack_webhook_url: "",
-          topics: Array.from(selected),
+          topics: selected.size > 0 ? Array.from(selected) : [...AVAILABLE_TOPICS],
         }));
     }
 

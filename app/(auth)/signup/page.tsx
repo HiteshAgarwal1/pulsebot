@@ -67,6 +67,7 @@ export default function SignupPage() {
             <Label htmlFor="displayName">Display name</Label>
             <Input
               id="displayName"
+              name="name"
               type="text"
               placeholder="Jane Doe"
               value={displayName}
@@ -79,6 +80,7 @@ export default function SignupPage() {
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
+              name="email"
               type="email"
               placeholder="you@example.com"
               value={email}
@@ -91,6 +93,7 @@ export default function SignupPage() {
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
+              name="password"
               type="password"
               placeholder="••••••••"
               value={password}
@@ -101,7 +104,7 @@ export default function SignupPage() {
             />
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col gap-4">
+        <CardFooter className="flex flex-col gap-4 border-t-0 bg-transparent pb-4">
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Creating account..." : "Sign up"}
           </Button>

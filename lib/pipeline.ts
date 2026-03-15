@@ -157,16 +157,15 @@ export async function deliverToUsers(
     const results = await Promise.allSettled(
       batch.map(async (config) => {
         // Filter articles by user's topic preferences
+        // Empty topics = all topics (no filtering)
         let filteredDigest = digest;
         if (config.topics && config.topics.length > 0) {
           const filteredArticles = digest.articles.filter((article) =>
             article.categories.some((c) => config.topics.includes(c))
           );
-          filteredDigest = {
-            ...digest,
-            articles:
-              filteredArticles.length > 0 ? filteredArticles : digest.articles,
-          };
+          if (filteredArticles.length > 0) {
+            filteredDigest = { ...digest, articles: filteredArticles };
+          }
         }
 
         // Limit to user's top_n

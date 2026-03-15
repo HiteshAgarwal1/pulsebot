@@ -18,6 +18,7 @@ import {
   TruckIcon,
   ArrowRightIcon,
 } from "lucide-react";
+import { LocalTime } from "./local-time";
 
 function statusBadge(status: DeliveryLog["status"]) {
   const variants: Record<
@@ -84,18 +85,7 @@ export default async function DashboardPage() {
             {latestDelivery ? (
               <div className="space-y-1">
                 {statusBadge(latestDelivery.status)}
-                <p className="text-xs text-muted-foreground mt-1">
-                  {new Date(latestDelivery.delivered_at).toLocaleDateString(
-                    "en-US",
-                    {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }
-                  )}
-                </p>
+                <LocalTime date={latestDelivery.delivered_at} />
               </div>
             ) : (
               <p className="text-sm text-muted-foreground">

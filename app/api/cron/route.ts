@@ -16,13 +16,6 @@ export async function GET(request: NextRequest) {
       process.env.CRON_SECRET;
 
     if (!isVercelCron && !isCustomSecret) {
-      const received = request.nextUrl.searchParams.get("secret") || "";
-      const expected = process.env.CRON_SECRET || "";
-      console.log("[Cron] Auth failed");
-      console.log("[Cron] Received length:", received.length, "Expected length:", expected.length);
-      console.log("[Cron] Match:", received === expected);
-      console.log("[Cron] Received (first 8):", JSON.stringify(received.slice(0, 8)));
-      console.log("[Cron] Expected (first 8):", JSON.stringify(expected.slice(0, 8)));
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

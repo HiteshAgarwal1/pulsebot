@@ -1,0 +1,52 @@
+feeds:
+  - name: TechCrunch AI
+    url: https://techcrunch.com/category/artificial-intelligence/feed/
+    tier: 1
+
+  - name: The Verge AI
+    url: https://www.theverge.com/rss/ai-artificial-intelligence/index.xml
+    tier: 1
+
+  - name: MIT Technology Review
+    url: https://www.technologyreview.com/feed/
+    tier: 1
+
+  - name: VentureBeat AI
+    url: https://venturebeat.com/category/ai/feed/
+    tier: 1
+
+  - name: Ars Technica AI
+    url: https://feeds.arstechnica.com/arstechnica/technology-lab
+    tier: 2
+
+  - name: Wired AI
+    url: https://www.wired.com/feed/tag/ai/latest/rss
+    tier: 1
+
+  - name: OpenAI Blog
+    url: https://openai.com/blog/rss.xml
+    tier: 1
+
+  - name: Google AI Blog
+    url: https://blog.google/technology/ai/rss/
+    tier: 1
+
+  - name: Anthropic Blog
+    url: https://www.anthropic.com/rss.xml
+    tier: 1
+
+  - name: DeepMind Blog
+    url: https://deepmind.google/blog/rss.xml
+    tier: 1
+
+  - name: Hugging Face Blog
+    url: https://huggingface.co/blog/feed.xml
+    tier: 2
+
+  - name: Hacker News AI
+    url: https://hnrss.org/newest?q=AI+OR+LLM+OR+machine+learning&points=50
+    tier: 2
+
+  - name: ArXiv AI
+    url: http://arxiv.org/rss/cs.AI
+    tier: 2

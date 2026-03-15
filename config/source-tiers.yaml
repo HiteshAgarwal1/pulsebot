@@ -1,0 +1,28 @@
+tiers:
+  1:
+    label: Tier 1 — Official & Top-Tier
+    score_multiplier: 1.5
+    sources:
+      - TechCrunch AI
+      - The Verge AI
+      - MIT Technology Review
+      - VentureBeat AI
+      - Wired AI
+      - OpenAI Blog
+      - Google AI Blog
+      - Anthropic Blog
+      - DeepMind Blog
+
+  2:
+    label: Tier 2 — High Quality
+    score_multiplier: 1.2
+    sources:
+      - Ars Technica AI
+      - Hugging Face Blog
+      - Hacker News AI
+      - ArXiv AI
+
+  3:
+    label: Tier 3 — General
+    score_multiplier: 1.0
+    sources: []

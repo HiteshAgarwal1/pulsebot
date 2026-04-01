@@ -9,9 +9,11 @@ tiers:
       - VentureBeat AI
       - Wired AI
       - OpenAI Blog
+      - OpenAI News
       - Google AI Blog
-      - Anthropic Blog
       - DeepMind Blog
+      - Anthropic Blog
+      - Meta Engineering ML
 
   2:
     label: Tier 2 — High Quality
@@ -21,6 +23,9 @@ tiers:
       - Hugging Face Blog
       - Hacker News AI
       - ArXiv AI
+      - The Decoder
+      - Import AI
+      - AI Feed
 
   3:
     label: Tier 3 — General

@@ -25,13 +25,25 @@ const AI_KEYWORDS = [
   "o1",
   "o3",
   "o4-mini",
+  "chatgpt",
   "claude",
   "claude 4",
   "claude opus",
   "claude sonnet",
+  "claude code",
   "gemini",
   "gemini 2",
   "gemini ultra",
+  "qwen",
+  "qwen 3",
+  "deepseek",
+  "deepseek r1",
+  "grok",
+  "xai",
+  "cohere",
+  "command r",
+  "stability ai",
+  "stable diffusion",
   "transformer",
   "diffusion model",
   "generative ai",
@@ -67,7 +79,7 @@ const AI_KEYWORDS = [
 ];
 
 const CATEGORY_KEYWORDS: Record<string, string[]> = {
-  LLMs: ["llm", "large language model", "gpt", "gpt-4", "gpt-5", "o1", "o3", "o4-mini", "claude", "claude 4", "gemini", "chatbot", "transformer", "foundation model", "mistral", "llama", "phi-4", "reasoning model", "ai model", "new model", "model release", "benchmark"],
+  LLMs: ["llm", "large language model", "gpt", "gpt-4", "gpt-5", "o1", "o3", "o4-mini", "chatgpt", "claude", "claude 4", "claude code", "gemini", "chatbot", "transformer", "foundation model", "mistral", "llama", "phi-4", "qwen", "deepseek", "grok", "cohere", "command r", "reasoning model", "ai model", "new model", "model release", "benchmark"],
   "Computer Vision": ["computer vision", "image recognition", "diffusion", "stable diffusion", "midjourney", "dall-e", "image generation", "video generation", "sora"],
   Robotics: ["robot", "robotics", "autonomous", "self-driving", "drone", "humanoid"],
   "AI Policy & Regulation": ["regulation", "policy", "eu ai act", "governance", "ethics", "ban", "legislation", "congress", "senate"],
@@ -152,6 +164,11 @@ export function scoreArticles(articles: RawArticle[]): ScoredArticle[] {
         categories: categorizeArticle(article),
       };
     })
-    .filter((a) => calculateRelevanceScore(a) > 0.1) // Filter out irrelevant articles
+    .filter((a) => {
+      const relevance = calculateRelevanceScore(a);
+      // ArXiv papers need higher relevance to pass — filters out niche academic papers
+      const minRelevance = a.source === "ArXiv AI" ? 0.4 : 0.2;
+      return relevance > minRelevance;
+    })
     .sort((a, b) => b.score - a.score);
 }

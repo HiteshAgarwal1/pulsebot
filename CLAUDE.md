@@ -37,8 +37,11 @@ lib/
   supabase/        # Supabase clients (client, server, admin)
   types.ts         # Shared types, AVAILABLE_TOPICS, TIMEZONES
 config/
-  feeds.yaml       # RSS feed sources (tiered)
-  source-tiers.yaml
+  feeds.yaml       # RSS feed sources (tiered, all verified working)
+  source-tiers.yaml # Score multipliers per tier
+scripts/
+  check-recent-articles.ts  # Query recent articles from DB for quality review
+  generate-digest.ts        # Generate a digest locally (bypasses cache)
 supabase/
   migrations/      # Database schema
 ```
@@ -51,6 +54,8 @@ supabase/
 - **New users get all topics selected by default** when their config is first created.
 - **Theme stored in localStorage** (`pulsebot-theme`), default light.
 - **Auth cookies refreshed in middleware** — redirects carry refreshed cookies to prevent session expiry.
+- **ArXiv articles have a higher relevance threshold** (0.4 vs 0.2) to filter out niche academic papers.
+- **All RSS feed URLs must be verified** before adding to `feeds.yaml` — many AI lab blogs don't offer RSS. Use `scripts/check-recent-articles.ts` to audit article quality.
 
 ## Database Tables
 

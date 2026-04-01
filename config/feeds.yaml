@@ -31,10 +31,6 @@ feeds:
     url: https://blog.google/technology/ai/rss/
     tier: 1
 
-  - name: Anthropic Blog
-    url: https://www.anthropic.com/rss.xml
-    tier: 1
-
   - name: DeepMind Blog
     url: https://deepmind.google/blog/rss.xml
     tier: 1
@@ -49,4 +45,28 @@ feeds:
 
   - name: ArXiv AI
     url: http://arxiv.org/rss/cs.AI
+    tier: 2
+
+  - name: OpenAI News
+    url: https://openai.com/news/rss.xml
+    tier: 1
+
+  - name: Anthropic Blog
+    url: https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml
+    tier: 1
+
+  - name: Meta Engineering ML
+    url: https://engineering.fb.com/category/ml-applications/feed/
+    tier: 1
+
+  - name: The Decoder
+    url: https://the-decoder.com/feed/
+    tier: 2
+
+  - name: Import AI
+    url: https://jack-clark.net/feed/
+    tier: 2
+
+  - name: AI Feed
+    url: https://aifeed.dev/feed.xml
     tier: 2

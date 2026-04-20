@@ -80,14 +80,22 @@ const AI_KEYWORDS = [
 
 const CATEGORY_KEYWORDS: Record<string, string[]> = {
   LLMs: ["llm", "large language model", "gpt", "gpt-4", "gpt-5", "o1", "o3", "o4-mini", "chatgpt", "claude", "claude 4", "claude code", "gemini", "chatbot", "transformer", "foundation model", "mistral", "llama", "phi-4", "qwen", "deepseek", "grok", "cohere", "command r", "reasoning model", "ai model", "new model", "model release", "benchmark"],
-  "Computer Vision": ["computer vision", "image recognition", "diffusion", "stable diffusion", "midjourney", "dall-e", "image generation", "video generation", "sora"],
-  Robotics: ["robot", "robotics", "autonomous", "self-driving", "drone", "humanoid"],
-  "AI Policy & Regulation": ["regulation", "policy", "eu ai act", "governance", "ethics", "ban", "legislation", "congress", "senate"],
-  "Funding & Acquisitions": ["funding", "raised", "valuation", "acquisition", "acquired", "series a", "series b", "ipo", "investment", "billion", "million"],
-  "Research Papers": ["paper", "research", "arxiv", "study", "findings", "researchers", "published"],
-  "Open Source": ["open source", "open-source", "github", "hugging face", "weights", "model release", "apache", "mit license"],
-  "AI Safety": ["safety", "alignment", "existential risk", "agi", "superintelligence", "guardrails", "red team", "jailbreak"],
-  "AI Tools & Products": ["launch", "product", "tool", "api", "platform", "feature", "release", "app", "plugin", "integration"],
+  "Computer Vision": ["computer vision", "image recognition", "object detection", "segmentation", "vision model", "image classification"],
+  Robotics: ["robot", "robotics", "autonomous vehicle", "self-driving", "drone", "humanoid", "manipulation"],
+  "AI Policy & Regulation": ["regulation", "policy", "eu ai act", "governance", "ethics", "ban", "legislation", "congress", "senate", "lawsuit", "copyright"],
+  "Funding & Acquisitions": ["funding", "raised", "valuation", "acquisition", "acquired", "series a", "series b", "series c", "ipo", "investment", "funding round", "venture"],
+  "Research Papers": ["paper", "arxiv", "preprint", "findings", "researchers", "published study", "peer-reviewed"],
+  "Open Source": ["open source", "open-source", "open weights", "hugging face", "apache license", "mit license", "permissive license"],
+  "AI Safety": ["ai safety", "alignment", "existential risk", "agi", "superintelligence", "guardrail", "red team", "jailbreak", "model evaluation", "deceptive"],
+  "AI Tools & Products": ["ide", "plugin", "extension", "developer tool", "api release", "sdk", "no-code", "low-code", "workflow automation"],
+  "AI Agents": ["ai agent", "agentic", "autonomous agent", "multi-agent", "agent framework", "browser agent", "coding agent", "tool use", "function calling"],
+  "AI in Healthcare": ["healthcare", "medical ai", "medicine", "diagnosis", "clinical", "patient", "drug discovery", "biotech", "radiology", "pathology", "ehr"],
+  "Generative Media": ["image generation", "video generation", "sora", "midjourney", "dall-e", "stable diffusion", "diffusion model", "audio generation", "music generation", "voice cloning", "text-to-image", "text-to-video", "text-to-audio", "deepfake"],
+  "AI Startups": ["startup", "founded", "y combinator", " yc ", "pre-seed", "seed round", "stealth mode", "founder"],
+  "Multimodal AI": ["multimodal", "vision-language", "vlm", "audio-visual", "cross-modal", "omni model"],
+  "AI for Marketing": ["marketing", "customer engagement", "personalization", "recommendation engine", "crm", "marketing automation", "lead generation"],
+  "AI Advertising": ["advertising", "ad tech", "adtech", "advertisement", "programmatic ads", "ad targeting", "ad creative"],
+  "AI Content Creation": ["content creation", "content generation", "creator economy", "writing assistant", "copywriting", "blog generation", "seo content", "social media content"],
 };
 
 function loadTierConfig(): TierConfig {
@@ -139,7 +147,7 @@ function categorizeArticle(article: RawArticle): string[] {
     }
   }
 
-  return categories.length > 0 ? categories : ["AI Tools & Products"];
+  return categories;
 }
 
 export function scoreArticles(articles: RawArticle[]): ScoredArticle[] {

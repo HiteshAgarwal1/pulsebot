@@ -156,16 +156,23 @@ export async function deliverToUsers(
 
     const results = await Promise.allSettled(
       batch.map(async (config) => {
-        // Filter articles by user's topic preferences
-        // Empty topics = all topics (no filtering)
-        let filteredDigest = digest;
+        // Filter articles by user's topic preferences.
+        // Empty topics = all topics (no filtering). Non-empty topics are
+        // respected strictly: if nothing matches, the user gets an empty
+        // digest rather than the unfiltered firehose.
+        let filteredDigest: DigestResult = digest;
         if (config.topics && config.topics.length > 0) {
           const filteredArticles = digest.articles.filter((article) =>
             article.categories.some((c) => config.topics.includes(c))
           );
-          if (filteredArticles.length > 0) {
-            filteredDigest = { ...digest, articles: filteredArticles };
-          }
+          filteredDigest = {
+            ...digest,
+            articles: filteredArticles,
+            tldr:
+              filteredArticles.length === 0
+                ? `No stories matched your selected topics today (${config.topics.join(", ")}). Consider broadening your selection in Settings.`
+                : digest.tldr,
+          };
         }
 
         // Limit to user's top_n
@@ -175,6 +182,17 @@ export async function deliverToUsers(
             articles: filteredDigest.articles.slice(0, config.top_n),
           };
         }
+
+        // Recompute categoriesCovered from the final article set so the
+        // Slack footer reflects what was actually delivered.
+        const finalCategories = new Set<string>();
+        for (const article of filteredDigest.articles) {
+          article.categories.forEach((c) => finalCategories.add(c));
+        }
+        filteredDigest = {
+          ...filteredDigest,
+          categoriesCovered: Array.from(finalCategories),
+        };
 
         const result = await deliverToSlack(
           config.slack_webhook_url,
